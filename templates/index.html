@@ -1,54 +1,93 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAPA LARTAS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAPA LARTAS</title>
 
-<!-- Favicon dari File Internal (static/images/logo.png) -->
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/harmonis.png') }}">
+    <!-- Favicon dari File Internal (static/images/harmonis.png) -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/harmonis.png') }}">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
     <style>
-        .visitor-stat-box {
-            margin-top: 25px;
+        /* STYLING RAPI STATISTIK 2 BARIS */
+        .counter-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .visitor-counter-wrapper {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .visitor-stat-box h4 {
-            margin: 0 0 12px 0;
-            font-size: 15px;
-            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #1e293b;
+            justify-content: center;
         }
 
-        .counter-wrapper {
-            background: #f8fafc;
+        .feedback-counter-wrapper {
+            background: #ffffff;
             border: 1px solid #e2e8f0;
-            padding: 12px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .counter-badge {
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 12px;
             border-radius: 8px;
-            text-align: center;
-            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-sizing: border-box;
         }
 
-        .counter-wrapper a {
-            font-size: 0;
-            line-height: 0;
-            display: inline-block;
+        .visitor-badge {
+            color: #166534;
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            width: 100%;
+            justify-content: center;
         }
 
-        .counter-wrapper img {
-            display: inline-block !important;
+        .useful-badge {
+            color: #15803d;
+            background-color: #dcfce7;
+            border: 1px solid #86efac;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .not-useful-badge {
+            color: #b91c1c;
+            background-color: #fee2e2;
+            border: 1px solid #fca5a5;
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Hover Style Tombol Feedback Modal */
+        .feedback-btn-useful:hover {
+            background-color: #dcfce7 !important;
+            transform: translateY(-2px);
+        }
+        .feedback-btn-not-useful:hover {
+            background-color: #fee2e2 !important;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -74,7 +113,7 @@
                     <span style="display: block; margin: 2px 0 0 0; font-size: 17px; font-weight: 700; color: #15803d; text-transform: uppercase; letter-spacing: 0.5px;">
                         BEDELAU BPOM Dumai
                     </span>
-                    <p style="margin: 4px 0 0 0; font-size: 12px; color: #475569; line-height: 1.4;">Berintegritas, Efisien, Dan Melayani Sepenuh Hati</p>
+                    <p style="margin: 4px 0 0 0; font-size: 12px; color: #475569; line-height: 1.4;">BErani DEngan Layanan yang Amanah dan Unggul</p>
                 </div>
                 <img src="/static/images/harmonis.png" alt="Maskot BEDELAU" style="height: 110px; width: auto; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.15)); flex-shrink: 0; transform: scale(1.05); transition: transform 0.2s ease;" />
             </div>
@@ -103,29 +142,60 @@
                 </div>
             </div>
 
-            <!-- SEKSI STATISTIK PENGUNJUNG -->
-            <div class="counter-wrapper">
-                <div style="font-family: inherit; font-size: 13px; font-weight: 600; color: #166534; background-color: #f0fdf4; border: 1px solid #bbf7d0; padding: 6px 10px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px;">
-                    <span>Total Pengunjung:</span>
-                    <span id="visitor-count">...</span>
+            <!-- SEKSI STATISTIK PENGUNJUNG & FEEDBACK -->
+            <div class="counter-container">
+                <!-- BARIS ATAS: Total Pengunjung Mandiri (Full Width) -->
+                <div class="visitor-counter-wrapper">
+                    <div class="counter-badge visitor-badge">
+                        <span>👥 Total Pengunjung:</span>
+                        <span id="visitor-count">...</span>
+                    </div>
                 </div>
 
-                <script>
-                    (function() {
-                        fetch('/api/visitor_count')
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data && data.count) {
-                                    document.getElementById('visitor-count').innerText = data.count.toLocaleString('id-ID');
-                                }
-                            })
-                            .catch(err => {
-                                console.error("Gagal mengambil data dari DB:", err);
-                                document.getElementById('visitor-count').innerText = "-";
-                            });
-                    })();
-                </script>
+                <!-- BARIS BAWAH: Counter Bermanfaat & Tidak Bermanfaat (2 Kolom Berderet) -->
+                <div class="feedback-counter-wrapper">
+                    <div class="counter-badge useful-badge">
+                        <span>👍 Bermanfaat:</span>
+                        <span id="useful-count">...</span>
+                    </div>
+                    <div class="counter-badge not-useful-badge">
+                        <span>👎 Tidak Bermanfaat:</span>
+                        <span id="not-useful-count">...</span>
+                    </div>
+                </div>
             </div>
+
+            <script>
+                (function() {
+                    // Fetch Data Total Pengunjung
+                    fetch('/api/visitor_count')
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data && data.count) {
+                                document.getElementById('visitor-count').innerText = data.count.toLocaleString('id-ID');
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Gagal mengambil data visitor:", err);
+                            document.getElementById('visitor-count').innerText = "-";
+                        });
+
+                    // Fetch Data Statistik Feedback
+                    fetch('/api/feedback_stats')
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data) {
+                                document.getElementById('useful-count').innerText = (data.useful || 0).toLocaleString('id-ID');
+                                document.getElementById('not-useful-count').innerText = (data.not_useful || 0).toLocaleString('id-ID');
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Gagal mengambil statistik feedback:", err);
+                            document.getElementById('useful-count').innerText = "0";
+                            document.getElementById('not-useful-count').innerText = "0";
+                        });
+                })();
+            </script>
         </div> <!-- PENUTUP .info-panel -->
 
         <!-- SEKSI KANAN: Chat Assistant Card -->
@@ -176,7 +246,7 @@
             <i class="fa-solid fa-circle-question"></i>
         </button>
 
-        <a href="https://wa.me/6281372315669?text=Halo%20Admin%20BPOM,%20saya%20ingin%20bertanya%20mengenai%20aturan%20barang%20bawaan." 
+        <a href="https://wa.me/6281372315669?text=Halo%20Admin%20BPOM,%20saya%20ingin%20bertanya%20mengenai%20aturan%20barang%20bawaan%20penumpang." 
            target="_blank" class="float-btn wa-btn" title="Hubungi via WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
@@ -243,6 +313,34 @@
         </div>
     </div>
 
+    <!-- MODAL FEEDBACK (Pop-up Evaluasi Kepuasan Pengguna) -->
+    <div class="modal-overlay" id="feedbackModal" style="display: none;">
+        <div class="modal-box feedback-modal-box" style="text-align: center; padding: 24px; max-width: 380px;">
+            <div style="font-size: 36px; margin-bottom: 8px;">💬</div>
+            <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #0f172a;">
+                Apakah layanan ini bermanfaat?
+            </h3>
+            <p style="font-size: 13px; color: #64748b; margin: 8px 0 20px 0; line-height: 1.4;">
+                Bantu kami meningkatkan kualitas layanan SAPA LARTAS BPOM Dumai.
+            </p>
+
+            <!-- Opsi Pilihan Feedback -->
+            <div id="feedbackOptions" style="display: flex; justify-content: center; gap: 12px;">
+                <button onclick="submitFeedback('useful')" class="feedback-btn-useful" style="flex: 1; padding: 12px 8px; border: 2px solid #22c55e; background-color: #f0fdf4; color: #15803d; border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease;">
+                    <span style="font-size: 18px;">👍</span> Bermanfaat
+                </button>
+                <button onclick="submitFeedback('not_useful')" class="feedback-btn-not-useful" style="flex: 1; padding: 12px 8px; border: 2px solid #ef4444; background-color: #fef2f2; color: #b91c1c; border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s ease;">
+                    <span style="font-size: 18px;">👎</span> Tidak Bermanfaat
+                </button>
+            </div>
+
+            <!-- Pesan Terima Kasih (Tersembunyi Awalnya) -->
+            <div id="feedbackThanks" style="display: none; font-size: 14px; font-weight: 600; color: #166534; padding: 12px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; margin-top: 10px;">
+                🎉 Terima kasih atas masukan Anda!
+            </div>
+        </div>
+    </div>
+
 <audio id="audioRefresh" src="{{ url_for('static', filename='audio/refresh.mp3') }}" preload="auto"></audio>
 <audio id="audioPopup" src="{{ url_for('static', filename='audio/popup.mp3') }}" preload="auto"></audio>
 <audio id="audioSuccess" src="{{ url_for('static', filename='audio/benar.mp3') }}" preload="auto"></audio>
@@ -250,5 +348,60 @@
 
 <!-- File JS dimuat paling bawah -->
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+<!-- Skrip Pendukung Pengendali Modal Feedback -->
+<script>
+    function openFeedbackModal() {
+        const modal = document.getElementById('feedbackModal');
+        document.getElementById('feedbackOptions').style.display = 'flex';
+        document.getElementById('feedbackThanks').style.display = 'none';
+        modal.style.display = 'flex';
+    }
+
+    function closeFeedbackModal() {
+        document.getElementById('feedbackModal').style.display = 'none';
+    }
+
+    function submitFeedback(voteType) {
+        fetch('/api/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ vote: voteType })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Update tampilan counter di halaman utama secara real-time
+                if (data.useful !== undefined) {
+                    document.getElementById('useful-count').innerText = data.useful.toLocaleString('id-ID');
+                }
+                if (data.not_useful !== undefined) {
+                    document.getElementById('not-useful-count').innerText = data.not_useful.toLocaleString('id-ID');
+                }
+
+                document.getElementById('feedbackOptions').style.display = 'none';
+                document.getElementById('feedbackThanks').style.display = 'block';
+                
+                setTimeout(() => {
+                    closeFeedbackModal();
+                }, 1800);
+            }
+        })
+        .catch(err => {
+            console.error("Gagal menyimpan feedback:", err);
+            closeFeedbackModal();
+        });
+    }
+
+    // Memicu openFeedbackModal() saat tombol 'Selesai' di dalam fitur chat diklik
+    document.addEventListener('click', function(e) {
+        const target = e.target.closest('button');
+        if (target && target.innerText.includes('Selesai')) {
+            openFeedbackModal();
+        }
+    });
+</script>
 </body>
 </html>

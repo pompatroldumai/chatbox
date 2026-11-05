@@ -1373,3 +1373,41 @@ body {
         font-size: 11px !important;
     }
 }
+/* ==========================================
+   MEMPERLEBAR JARAK PANEL KIRI DAN CHATBOX
+   ========================================== */
+@media screen and (min-width: 861px) {
+    .main-wrapper {
+        max-width: 1240px !important;
+        width: 100% !important;
+        gap: 110px !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+    }
+
+    .info-panel {
+        flex: 0 1 520px !important;
+        max-width: 520px !important;
+        min-width: 0 !important;
+    }
+
+    .chat-container {
+        flex: 0 0 450px !important;
+        width: 450px !important;
+        max-width: 450px !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Tampilan tablet dan HP tidak berubah */
+@media screen and (max-width: 860px) {
+    .main-wrapper {
+        flex-direction: column !important;
+        gap: 24px !important;
+    }
+
+    .chat-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}

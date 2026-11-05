@@ -26,6 +26,8 @@ def init_db():
     if redis_client is None:
         conn = sqlite3.connect(DATABASE)
         cursor = conn.cursor()
+        
+        # Tabel visitor count
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS visitor (
                 id INTEGER PRIMARY KEY,
@@ -35,6 +37,19 @@ def init_db():
         cursor.execute('SELECT COUNT(*) FROM visitor')
         if cursor.fetchone()[0] == 0:
             cursor.execute('INSERT INTO visitor (id, count) VALUES (1, 0)')
+
+        # Tabel feedback count
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS feedback (
+                id INTEGER PRIMARY KEY,
+                useful_count INTEGER NOT NULL DEFAULT 0,
+                not_useful_count INTEGER NOT NULL DEFAULT 0
+            )
+        ''')
+        cursor.execute('SELECT COUNT(*) FROM feedback')
+        if cursor.fetchone()[0] == 0:
+            cursor.execute('INSERT INTO feedback (id, useful_count, not_useful_count) VALUES (1, 0, 0)')
+
         conn.commit()
         conn.close()
 
@@ -121,6 +136,71 @@ def visitor_count():
         print("Error SQLite:", e)
         return jsonify({"count": 1})
 
+@app.route('/api/feedback_stats', methods=['GET'])
+def get_feedback_stats():
+    """Endpoint untuk mengambil statistik feedback terbaru."""
+    if redis_client:
+        try:
+            useful = int(redis_client.get("feedback_useful") or 0)
+            not_useful = int(redis_client.get("feedback_not_useful") or 0)
+            return jsonify({"useful": useful, "not_useful": not_useful})
+        except Exception as e:
+            print("Error Redis Feedback Stats:", e)
+            return jsonify({"useful": 0, "not_useful": 0})
+
+    try:
+        conn = sqlite3.connect(DATABASE)
+        cursor = conn.cursor()
+        cursor.execute('SELECT useful_count, not_useful_count FROM feedback WHERE id = 1')
+        row = cursor.fetchone()
+        conn.close()
+
+        if row:
+            return jsonify({"useful": row[0], "not_useful": row[1]})
+        return jsonify({"useful": 0, "not_useful": 0})
+    except Exception as e:
+        print("Error SQLite Feedback Stats:", e)
+        return jsonify({"useful": 0, "not_useful": 0})
+
+@app.route('/api/feedback', methods=['POST'])
+def save_feedback():
+    """Endpoint untuk menyimpan vote feedback pengguna (bermanfaat/tidak_bermanfaat)."""
+    data = request.get_json(silent=True) or {}
+    vote = data.get('vote')  # 'useful' atau 'not_useful'
+
+    if vote not in ['useful', 'not_useful']:
+        return jsonify({"type": "error", "message": "Pilihan tidak valid."}), 400
+
+    # 1. Penyimpanan via Upstash Redis (Vercel)
+    if redis_client:
+        try:
+            key = "feedback_useful" if vote == "useful" else "feedback_not_useful"
+            redis_client.incr(key)
+            useful = int(redis_client.get("feedback_useful") or 0)
+            not_useful = int(redis_client.get("feedback_not_useful") or 0)
+            return jsonify({"status": "success", "vote": vote, "useful": useful, "not_useful": not_useful})
+        except Exception as e:
+            print("Error Redis Feedback:", e)
+            return jsonify({"status": "error", "message": str(e)}), 500
+
+    # 2. Penyimpanan via SQLite (Lokal)
+    try:
+        conn = sqlite3.connect(DATABASE)
+        cursor = conn.cursor()
+        column = "useful_count" if vote == "useful" else "not_useful_count"
+        
+        cursor.execute(f'UPDATE feedback SET {column} = {column} + 1 WHERE id = 1')
+        conn.commit()
+
+        cursor.execute('SELECT useful_count, not_useful_count FROM feedback WHERE id = 1')
+        row = cursor.fetchone()
+        conn.close()
+
+        return jsonify({"status": "success", "vote": vote, "useful": row[0], "not_useful": row[1]})
+    except Exception as e:
+        print("Error SQLite Feedback:", e)
+        return jsonify({"status": "error", "message": str(e)}), 500
+
 @app.route('/api/main_menu', methods=['GET'])
 def main_menu():
     return jsonify({
@@ -182,7 +262,7 @@ def select_drug_type():
     elif drug_type == 'psikotropika':
         return jsonify({
             "type": "question_psikotropika",
-            "message": "Untuk Psikotropika, batasan aturan:\n• **Hanya WNA atau wisatawan asing**\n• Berapapun jumlahnya **harus sesuai resep dokter** (maksimal 60 hari pengobatan)\n\nApakah Anda WNA/Wisatawan Asing & membawa resep dokter?",
+            "message": "Untuk Psikotropika, batasan aturan:\n**Hanya WNA atau wisatawan asing**\nBerapapun jumlahnya **harus sesuai resep dokter** (maksimal 60 hari pengobatan)\n\nApakah Anda WNA/Wisatawan Asing & membawa resep dokter?",
             "options": [
                 {"id": "psiko_ya", "text": "Ya, WNA & Ada Resep Dokter"},
                 {"id": "psiko_tidak", "text": "Tidak Memiliki Resep"}
