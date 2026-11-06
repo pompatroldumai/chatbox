@@ -1,0 +1,1413 @@
+/* ==========================================================================
+   1. SYSTEM DESIGN TOKENS (ENTERPRISE / EXPERT SAAS THEME)
+   ========================================================================== */
+:root {
+    --brand-primary-start: #0f3d68;
+    --brand-primary-end: #1e5a96;
+    --brand-accent: #059669;
+    --brand-accent-hover: #047857;
+    --brand-accent-light: #f0fdf4;
+    
+    --status-success: #10b981;
+    --status-warning: #f59e0b;
+    --status-danger: #ef4444;
+    
+    --bg-surface: #ffffff;
+    --bg-chat-body: #fafcfd;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #94a3b8;
+    --border-light: #e2e8f0;
+    
+    /* Layered Professional Shadows */
+    --shadow-expert: 0 25px 50px -12px rgba(15, 61, 104, 0.18), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+    --shadow-card-hover: 0 12px 28px -6px rgba(15, 61, 104, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+    --shadow-bubble: 0 2px 8px -2px rgba(15, 23, 42, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    /* Background Ambient Glow Gradient */
+    background: radial-gradient(circle at 15% 15%, #e0f2fe 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, #d1fae5 0%, transparent 40%),
+                #f1f5f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ==========================================================================
+   2. MAIN WRAPPER (LAYOUT FLEX EXPERT)
+   ========================================================================== */
+.main-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* ==========================================================================
+   3. PANEL KIRI (HERO & EXPERT CONTENT)
+   ========================================================================== */
+.info-panel {
+    flex: 1;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(14, 116, 144, 0.08);
+    color: var(--brand-primary-start);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 99px;
+    width: fit-content;
+    border: 1px solid rgba(14, 116, 144, 0.15);
+    backdrop-filter: blur(6px);
+}
+
+.info-panel h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    /* Gradient Text Effect */
+    background: linear-gradient(135deg, #0f3d68 0%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.info-panel .description {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 1px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+    backdrop-filter: blur(10px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-item:hover {
+    transform: translateY(-2px);
+    background: #ffffff;
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(5, 150, 105, 0.2);
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    color: var(--brand-accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(5, 150, 105, 0.15);
+}
+
+.feature-item h4 {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.feature-item p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    margin-top: 2px;
+}
+
+.info-footer {
+    background: linear-gradient(135deg, #fffbe3 0%, #fef3c7 100%);
+    border-left: 4px solid var(--status-warning);
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.08);
+}
+
+.info-footer p {
+    font-size: 11.5px;
+    color: #92400e;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   4. PANEL KANAN (CHAT CONTAINER GLASS CARD)
+   ========================================================================== */
+.chat-container {
+    width: 100%;
+    max-width: 430px;
+    height: 680px;
+    background: var(--bg-surface);
+    border-radius: 28px;
+    box-shadow: var(--shadow-expert);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    flex-shrink: 0;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, var(--brand-primary-start), var(--brand-primary-end));
+    color: #ffffff;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    background: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 2px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.header-info {
+    flex: 1;
+}
+
+.header-info h3 {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.1px;
+}
+
+.header-info p {
+    font-size: 11px;
+    color: #dbeafe;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.online-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #34d399;
+    border-radius: 50%;
+    position: relative;
+}
+
+.online-indicator::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 12px;
+    height: 12px;
+    background-color: rgba(52, 211, 153, 0.4);
+    border-radius: 50%;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.reset-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.reset-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: rotate(180deg);
+}
+
+.chat-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: var(--bg-chat-body);
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    max-width: 88%;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bot-message { align-self: flex-start; }
+.user-message { align-self: flex-end; }
+
+.message-content {
+    background: #ffffff;
+    color: var(--text-primary);
+    padding: 13px 17px;
+    border-radius: 18px 18px 18px 4px;
+    box-shadow: var(--shadow-bubble);
+    font-size: 13px;
+    line-height: 1.55;
+    border: 1px solid var(--border-light);
+}
+
+.user-message .message-content {
+    background: linear-gradient(135deg, var(--brand-primary-start), var(--brand-primary-end));
+    color: #ffffff;
+    border-radius: 18px 18px 4px 18px;
+    border: none;
+    box-shadow: 0 4px 14px rgba(15, 61, 104, 0.22);
+}
+
+/* ==========================================================================
+   5. EXPERT INTERACTIVE BUTTONS
+   ========================================================================== */
+.options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.options-group button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    color: var(--text-primary);
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    position: relative;
+}
+
+/* Micro Active Accent Effect */
+.options-group button::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 3px;
+    background: var(--brand-accent);
+    border-radius: 0 4px 4px 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.options-group button:hover {
+    background: var(--brand-accent-light);
+    border-color: rgba(5, 150, 105, 0.3);
+    color: var(--brand-accent-hover);
+    transform: translateX(4px);
+    box-shadow: 0 6px 16px -2px rgba(5, 150, 105, 0.15);
+}
+
+.options-group button:hover::before {
+    opacity: 1;
+}
+
+.option-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.options-group button:hover .option-icon {
+    transform: scale(1.2);
+}
+
+.option-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.note-text {
+    color: var(--status-danger);
+    font-size: 10.5px;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+/* Input group */
+.input-group-chat {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.input-group-chat input {
+    flex: 1;
+    padding: 11px 15px;
+    border: 1.5px solid var(--border-light);
+    border-radius: 12px;
+    font-size: 13px;
+    outline: none;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.input-group-chat input:focus {
+    border-color: var(--brand-accent);
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+}
+
+.input-group-chat button {
+    background: var(--brand-accent);
+    color: #ffffff;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.input-group-chat button:hover {
+    background: var(--brand-accent-hover);
+    transform: translateY(-1px);
+}
+
+.chat-footer {
+    padding: 12px 16px;
+    background: #ffffff;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    border-top: 1px solid var(--border-light);
+}
+.visitor-stat-box {
+        margin-top: 25px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+
+    .visitor-stat-box h4 {
+        margin: 0 0 12px 0;
+        font-size: 15px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #1e293b; /* Warna teks gelap agar terbaca jelas */
+    }
+
+    .counter-wrapper {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+        min-height: 40px;
+    }
+
+    /* Memastikan gambar counter tampil dan menyembunyikan teks tautan saja */
+    .counter-wrapper a {
+        font-size: 0;
+        line-height: 0;
+        display: inline-block;
+    }
+
+    .counter-wrapper img {
+        display: inline-block !important;
+    }
+
+    /* Layout Wrapper Utama 2 Kolom */
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px; /* Jarak antar panel kiri dan kanan */
+    max-width: 1100px; /* Batas lebar keseluruhan halaman */
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Panel Kiri (Info & Banner) */
+.info-panel {
+    flex: 1 1 50%; /* Mengambil 50% lebar area */
+    max-width: 520px; /* Diperbesar agar teks dan banner maskot lega */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Jarak pas antar elemen vertikal */
+}
+
+/* Panel Kanan (Chat Assistant) */
+.chat-container {
+    flex: 1 1 50%; /* Mengambil 50% lebar area */
+    max-width: 450px; /* Ukuran ideal kartu chat */
+    width: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Responsif untuk Layar HP/Tablet */
+/* ==========================================
+   CSS RESPONSIF UTAMA (MOBILE & TABLET)
+   ========================================== */
+
+/* ==========================================
+   CSS RESPONSIF LENGKAP UNTUK TAMPILAN HP
+   ========================================== */
+
+@media screen and (max-width: 768px) {
+    /* 1. Layout Wrapper Menjadi 1 Kolom Vertikal */
+    .main-wrapper {
+        flex-direction: column !important;
+        padding: 12px 12px 80px 12px !important; /* Jarak bawah ditambah agar tidak tertutup tombol melayang */
+        gap: 16px !important;
+    }
+
+    /* 2. Lebar Elemen Memenuhi Layar HP */
+    .info-panel, 
+    .chat-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* 3. Penyesuaian Ukuran Font & Header */
+    .info-panel h1 {
+        font-size: 20px !important;
+        line-height: 1.3 !important;
+    }
+
+    .info-panel .description {
+        font-size: 13px !important;
+    }
+
+    /* 4. Banner Bedelau & Maskot */
+    .info-panel div[style*="linear-gradient"] {
+        padding: 10px 14px !important;
+    }
+
+    .info-panel img[alt="Maskot BEDELAU"] {
+        height: 70px !important;
+    }
+
+    /* 5. PERBAIKAN TINGGI CHATBOX (Agar Tidak Terpotong) */
+    .chat-container {
+        height: 420px !important; /* Dikurangi agar muat di layar HP */
+        max-height: 60vh !important;
+        border-radius: 16px !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .chat-body {
+        padding: 12px !important;
+        flex: 1 !important;
+        overflow-y: auto !important;
+    }
+
+    /* 6. PERBAIKAN TOMBOL MELAYANG (FAQ & WA) */
+    .floating-container {
+        bottom: 12px !important;
+        right: 12px !important;
+        z-index: 9999 !important; /* Memastikan tombol di atas layar */
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    .float-btn {
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 18px !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+    }
+}
+
+.modal-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+/* Modal Popup */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(6px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Container Tombol Melayang */
+.floating-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 999;
+}
+
+/* Base style tombol mengapung */
+.float-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+}
+
+.float-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Warna khusus tiap tombol */
+.wa-btn {
+    background-color: #25d366;
+}
+
+.faq-btn {
+    background-color: #0284c7;
+}
+
+/* ==========================================
+   CSS MODAL & KONTEN FAQ (FULL & RAPI)
+   ========================================== */
+
+/* 1. Overlay Hitam Transparan di Belakang Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);            /* Efek buram halus di latar belakang */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 2. Styling Utama Kotak Modal FAQ (Diperlebar) */
+.modal-box.faq-modal-box {
+    width: 100% !important;
+    max-width: 650px !important;            /* Diperlebar agar teks dan kotak di dalamnya lega */
+    max-height: 85vh !important;           /* Batas tinggi agar tidak jebol layar di laptop/HP */
+    display: flex !important;
+    flex-direction: column !important;
+    background: #ffffff !important;
+    padding: 24px 28px !important;         /* Ruang dalam yang lapang */
+    border-radius: 20px !important;         /* Sudut rounded modern */
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15) !important;
+    box-sizing: border-box !important;
+    animation: modalPop 0.25s ease-out;     /* Animasi pop-up saat dibuka */
+}
+
+/* 3. Header Modal (Judul FAQ & Tombol Tutup) */
+.faq-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px solid #e5e7eb !important;
+}
+
+.faq-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.faq-title-group h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* Tombol Silang (X) di Kanan Atas */
+/* Sembunyikan tombol X sepenuhnya */
+.close-faq-btn,
+.faq-header button.close-faq-btn {
+    display: none !important;
+}
+
+.close-faq-btn:hover {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+/* 4. Area Konten FAQ yang Bisa Di-scroll */
+.faq-content {
+    width: 100% !important;
+    flex: 1 !important;
+    overflow-y: auto !important;           /* Scroll otomatis jika pertanyaan banyak */
+    padding-right: 8px !important;         /* Jarak agar teks tidak menempel scrollbar */
+    box-sizing: border-box !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;                              /* Jarak antar item pertanyaan */
+}
+
+/* 5. Item Pertanyaan & Jawaban FAQ */
+.faq-item {
+    width: 100% !important;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease;
+}
+
+.faq-item:hover {
+    border-color: #0284c7;                  /* Highlight border saat kursor di atasnya */
+}
+
+/* Teks Pertanyaan (Q:) */
+.faq-question {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* Teks Jawaban (Resep/Penjelasan) */
+.faq-answer {
+    font-size: 13px;
+    color: #475569;
+    background: #f8fafc;
+    border-left: 4px solid #0284c7;          /* Garis penegas di sebelah kiri jawaban */
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin: 0;
+    line-height: 1.6;
+    word-break: break-word;                  /* Memastikan teks tidak meluap keluar */
+}
+
+/* 6. Footer Modal (Tombol Tutup di Bawah) */
+.faq-footer {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.faq-btn-submit,
+.faq-footer button {
+    width: 100% !important;
+    background: #0284c7;                     /* Warna biru sesuai tombol UI BPOM Anda */
+    color: #ffffff;
+    border: none;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.faq-btn-submit:hover,
+.faq-footer button:hover {
+    background: #0369a1;
+}
+
+/* 7. Kustomisasi Scrollbar Lebih Rapi */
+.faq-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.faq-content::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.faq-content::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.faq-content::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* 8. Animasi Modal Pop-up */
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.btn-primary-faq {
+    width: 100%;
+    padding: 11px;
+    background-color: #0284c7;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary-faq:hover {
+    background-color: #0369a1;
+}
+.btn-primary-faq {
+    width: 100%;
+    padding: 10px;
+    background-color: #0284c7;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.modal-box {
+    background: #ffffff;
+    width: 90%;
+    max-width: 360px;
+    padding: 26px;
+    border-radius: 22px;
+    text-align: left;
+    box-shadow: var(--shadow-expert);
+}
+/* ==========================================================================
+   PERBAIKAN PANEL KIRI & VISITOR COUNTER
+   ========================================================================== */
+
+/* 1. Pastikan info-panel bisa menampung elemen di bawahnya tanpa terpotong */
+.info-panel {
+    flex: 1;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: visible !important; /* Mencegah kotak statistik tertutup */
+}
+
+/* 2. Styling Kotak Statistik Pengunjung */
+.visitor-stat-box {
+    margin-top: 12px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+    width: 100%;
+    display: block !important;
+}
+
+.visitor-stat-box h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+}
+
+.counter-wrapper {
+    background: #f8fafc;
+    border: 1px solid var(--border-light);
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+} 
+
+.modal-icon { font-size: 44px; margin-bottom: 12px; }
+.modal-icon.success { color: var(--status-success); }
+.modal-icon.warning { color: var(--status-warning); }
+.modal-icon.danger { color: var(--status-danger); }
+
+.modal-box h3 { font-size: 16.5px; margin-bottom: 8px; color: var(--text-primary); }
+.modal-box p { font-size: 12.5px; color: var(--text-secondary); margin-bottom: 20px; text-align: left; background: #f8fafc; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border-light); }
+.modal-box button { width: 100%; color: white; border: none; padding: 11px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+.modal-box button.btn-success { background: var(--status-success); }
+.modal-box button.btn-warning { background: var(--status-warning); }
+.modal-box button.btn-danger { background: var(--status-danger); }
+
+/* RESPONSIVE LAYOUT */
+@media (max-width: 860px) {
+    .main-wrapper {
+        flex-direction: column;
+        gap: 24px;
+    }
+    .info-panel {
+        text-align: center;
+        align-items: center;
+    }
+    .features-list {
+        display: none;
+    }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(0.95); opacity: 0; }
+}
+
+/* ==========================================================================
+   FINAL RESPONSIVE FIX
+   Perbaikan khusus HP / iPhone:
+   - mencegah horizontal overflow
+   - memastikan panel tidak melebar keluar viewport
+   - memperbaiki flex chat agar isi tidak tertutup footer
+   - menyesuaikan tinggi chat dengan layar HP
+   - memperbaiki safe-area iPhone
+   ========================================================================== */
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.main-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    min-width: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.info-panel,
+.chat-container {
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.info-panel img {
+    max-width: 100%;
+    height: auto;
+}
+
+.chat-container {
+    min-height: 0;
+}
+
+.chat-body {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.chat-footer {
+    flex: 0 0 auto;
+    min-height: 44px;
+}
+
+
+/* =========================
+   TABLET
+   ========================= */
+@media screen and (max-width: 860px) {
+    body {
+        display: block;
+        padding: 0;
+    }
+
+    .main-wrapper {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 16px !important;
+        margin: 0 !important;
+    }
+
+    .info-panel {
+        width: 100% !important;
+        max-width: none !important;
+        align-items: stretch !important;
+        text-align: center;
+    }
+
+    .chat-container {
+        width: 100% !important;
+        max-width: none !important;
+    }
+}
+
+
+/* =========================
+   HP / iPHONE
+   ========================= */
+@media screen and (max-width: 600px) {
+
+    body {
+        padding: 0 !important;
+        display: block !important;
+        overflow-x: hidden !important;
+    }
+
+    .main-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 12px 12px calc(90px + env(safe-area-inset-bottom)) !important;
+        margin: 0 !important;
+        gap: 14px !important;
+    }
+
+    .info-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 12px !important;
+        align-items: stretch !important;
+    }
+
+    .brand-badge {
+        align-self: center;
+        max-width: 100%;
+    }
+
+    .info-panel h1 {
+        width: 100%;
+        max-width: 100%;
+        font-size: clamp(19px, 5.3vw, 24px) !important;
+        line-height: 1.25 !important;
+        letter-spacing: -0.2px !important;
+        overflow-wrap: break-word;
+    }
+
+    .info-panel .description {
+        width: 100%;
+        max-width: 100%;
+        font-size: 12.5px !important;
+        line-height: 1.55 !important;
+    }
+
+    /* Banner Bedelau */
+    .info-panel div[style*="linear-gradient"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        padding: 10px 12px !important;
+        overflow: hidden !important;
+    }
+
+    .info-panel img[alt="Maskot BEDELAU"] {
+        max-width: 75px !important;
+        height: auto !important;
+        flex-shrink: 0;
+    }
+
+    /* Visitor counter */
+    .visitor-stat-box {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin-top: 4px !important;
+        padding: 12px !important;
+    }
+
+    .counter-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Chat */
+    .chat-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: min(560px, 68dvh) !important;
+        min-height: 460px !important;
+        max-height: 620px !important;
+        border-radius: 18px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        flex: none !important;
+    }
+
+    .chat-header {
+        flex: 0 0 auto;
+        padding: 14px 14px !important;
+        gap: 9px !important;
+    }
+
+    .avatar {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .header-info {
+        min-width: 0;
+    }
+
+    .header-info h3 {
+        font-size: 13.5px !important;
+    }
+
+    .header-info p {
+        font-size: 10.5px !important;
+    }
+
+    .reset-btn {
+        width: 34px !important;
+        height: 34px !important;
+        flex-shrink: 0;
+    }
+
+    .chat-body {
+        min-height: 0 !important;
+        padding: 12px !important;
+        gap: 12px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .message {
+        max-width: 94% !important;
+    }
+
+    .message-content {
+        font-size: 12.5px !important;
+        padding: 11px 13px !important;
+    }
+
+    .options-group {
+        width: 100% !important;
+        margin-top: 6px !important;
+        gap: 7px !important;
+    }
+
+    .options-group button {
+        width: 100% !important;
+        min-width: 0 !important;
+        padding: 10px 12px !important;
+        font-size: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    .option-text {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .input-group-chat {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    .input-group-chat input {
+        min-width: 0 !important;
+    }
+
+    .chat-footer {
+        flex: 0 0 auto !important;
+        padding: 10px 12px !important;
+        min-height: 42px !important;
+        font-size: 10.5px !important;
+    }
+
+    /* Floating buttons */
+    .floating-container {
+        right: 12px !important;
+        bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+        gap: 8px !important;
+    }
+
+    .float-btn {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 19px !important;
+    }
+
+    /* Modal */
+    .modal-overlay {
+        padding: 12px !important;
+        align-items: center !important;
+    }
+
+    .modal-box,
+    .modal-box.faq-modal-box {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 88dvh !important;
+        padding: 18px !important;
+        border-radius: 16px !important;
+    }
+
+    .faq-content {
+        min-height: 0 !important;
+        overflow-y: auto !important;
+    }
+}
+
+
+/* HP sangat kecil */
+@media screen and (max-width: 380px) {
+    .main-wrapper {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .info-panel h1 {
+        font-size: 18px !important;
+    }
+
+    .info-panel .description {
+        font-size: 12px !important;
+    }
+
+    .chat-container {
+        min-height: 430px !important;
+        height: min(530px, 67dvh) !important;
+    }
+}
+
+/* ==========================================================
+   FINAL FIX — FITUR TETAP TAMPIL DI MOBILE
+   ========================================================== */
+@media screen and (max-width: 860px) {
+    .features-list {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 8px !important;
+        margin-top: 4px !important;
+    }
+    .feature-item {
+        display: flex !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .features-list {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 8px !important;
+    }
+    .feature-item {
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 12px 14px !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+    }
+    .feature-icon {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        flex: 0 0 38px !important;
+        font-size: 15px !important;
+    }
+    .feature-item h4 {
+        font-size: 12.5px !important;
+        line-height: 1.35 !important;
+    }
+    .feature-item p {
+        font-size: 11.5px !important;
+        line-height: 1.4 !important;
+        margin-top: 2px !important;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .feature-item {
+        padding: 11px 12px !important;
+    }
+    .feature-icon {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        flex-basis: 36px !important;
+    }
+    .feature-item h4 {
+        font-size: 12px !important;
+    }
+    .feature-item p {
+        font-size: 11px !important;
+    }
+}
+/* ==========================================
+   MEMPERLEBAR JARAK PANEL KIRI DAN CHATBOX
+   ========================================== */
+@media screen and (min-width: 861px) {
+    .main-wrapper {
+        max-width: 1240px !important;
+        width: 100% !important;
+        gap: 110px !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+    }
+
+    .info-panel {
+        flex: 0 1 520px !important;
+        max-width: 520px !important;
+        min-width: 0 !important;
+    }
+
+    .chat-container {
+        flex: 0 0 450px !important;
+        width: 450px !important;
+        max-width: 450px !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Tampilan tablet dan HP tidak berubah */
+@media screen and (max-width: 860px) {
+    .main-wrapper {
+        flex-direction: column !important;
+        gap: 24px !important;
+    }
+
+    .chat-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
