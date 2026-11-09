@@ -1,7 +1,6 @@
-
- // ==========================================
- // 1. INITIALIZATION & AUDIO HANDLER
- // ==========================================
+// ==========================================
+// 1. INITIALIZATION & AUDIO HANDLER
+// ==========================================
 var chatBody = document.getElementById('chatBody');
 let currentActions = null;
 let audioUnlocked = false;
@@ -214,8 +213,6 @@ function appendAfterActionOptions(actions) {
 // 4. FLOW & API LOGIC
 // ==========================================
 
-// >>> BAGIAN INI SUDAH DIUBAH <<<
-// Klik TIDAK sekarang membuka popup feedback
 function handleConsultation(isYes) {
     const optionsGroup = document.getElementById('consultationOptions');
 
@@ -246,11 +243,7 @@ function handleConsultation(isYes) {
 
         // POPUP FEEDBACK MUNCUL SETELAH KLIK TIDAK
         setTimeout(() => {
-            if (typeof openFeedbackModal === 'function') {
-                openFeedbackModal();
-            } else {
-                console.error("Fungsi openFeedbackModal() belum tersedia.");
-            }
+            openFeedbackModal();
         }, 500);
     }
 }
@@ -401,6 +394,11 @@ function handleAfterAction(actionId, text) {
         appendBotMessage(
             "Terima kasih telah menggunakan layanan pengecekan batasan barang bawaan. Semoga perjalanan Anda menyenangkan! 👋"
         );
+
+        // POPUP FEEDBACK MUNCUL SETELAH FINISH
+        setTimeout(() => {
+            openFeedbackModal();
+        }, 800);
     }
 }
 
@@ -441,6 +439,24 @@ function closeModal() {
     }
 }
 
+// FUNGSI UNTUK MODAL FEEDBACK
+function openFeedbackModal() {
+    const feedbackModal = document.getElementById('feedbackModal');
+    if (feedbackModal) {
+        feedbackModal.style.display = 'flex';
+        playPopupSound();
+    } else {
+        console.warn("Elemen dengan ID 'feedbackModal' tidak ditemukan di DOM.");
+    }
+}
+
+function closeFeedbackModal() {
+    const feedbackModal = document.getElementById('feedbackModal');
+    if (feedbackModal) {
+        feedbackModal.style.display = 'none';
+    }
+}
+
 function openFaqModal() {
     const faqModal = document.getElementById('faqModal');
 
@@ -461,15 +477,12 @@ function resetChat() {
     window.location.reload();
 }
 
-
 // ==========================================
-// STATISTIK PENGECEKAN 6 KATEGORI BARANG
+// 6. STATISTIK PENGECEKAN 6 KATEGORI BARANG
 // ==========================================
 
 async function loadCategoryStats() {
-
     try {
-
         const response = await fetch('/api/category_stats');
 
         if (!response.ok) {
@@ -488,44 +501,24 @@ async function loadCategoryStats() {
         ];
 
         categories.forEach(category => {
-
-            const element = document.getElementById(
-                'count-' + category
-            );
+            const element = document.getElementById('count-' + category);
 
             if (element) {
-
-                element.textContent = (
-                    data[category] || 0
-                ).toLocaleString('id-ID');
-
+                element.textContent = (data[category] || 0).toLocaleString('id-ID');
             }
-
         });
 
     } catch (error) {
-
-        console.error(
-            'Gagal memperbarui statistik kategori:',
-            error
-        );
-
+        console.error('Gagal memperbarui statistik kategori:', error);
     }
-
 }
-
 
 // Ambil statistik saat halaman pertama kali dibuka
 document.addEventListener('DOMContentLoaded', function() {
-
     loadCategoryStats();
-
 });
-
 
 // Perbarui statistik setiap 3 detik
 setInterval(function() {
-
     loadCategoryStats();
-
 }, 3000);
