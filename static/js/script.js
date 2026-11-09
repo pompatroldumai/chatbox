@@ -460,3 +460,72 @@ function closeFaqModal() {
 function resetChat() {
     window.location.reload();
 }
+
+
+// ==========================================
+// STATISTIK PENGECEKAN 6 KATEGORI BARANG
+// ==========================================
+
+async function loadCategoryStats() {
+
+    try {
+
+        const response = await fetch('/api/category_stats');
+
+        if (!response.ok) {
+            throw new Error('Gagal mengambil statistik kategori');
+        }
+
+        const data = await response.json();
+
+        const categories = [
+            'obat',
+            'obat_tradisional',
+            'suplemen',
+            'kosmetik',
+            'pkmk',
+            'makanan'
+        ];
+
+        categories.forEach(category => {
+
+            const element = document.getElementById(
+                'count-' + category
+            );
+
+            if (element) {
+
+                element.textContent = (
+                    data[category] || 0
+                ).toLocaleString('id-ID');
+
+            }
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            'Gagal memperbarui statistik kategori:',
+            error
+        );
+
+    }
+
+}
+
+
+// Ambil statistik saat halaman pertama kali dibuka
+document.addEventListener('DOMContentLoaded', function() {
+
+    loadCategoryStats();
+
+});
+
+
+// Perbarui statistik setiap 3 detik
+setInterval(function() {
+
+    loadCategoryStats();
+
+}, 3000);

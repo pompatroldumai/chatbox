@@ -186,7 +186,7 @@
             </div>
             <h1>Layanan Cek Batasan Barang Bawaan Penumpang</h1>
             <p class="description">
-                Cek aturan resmi batasan jumlah barang bawaan penumpang untuk penggunaan pribadi (Obat, Obat Bahan Alam, Suplemen, Kosmetik, dan Pangan Olahan) sesuai dengan regulasi Badan Pengawas Obat dan Makanan.
+                Cek aturan resmi batasan jumlah barang bawaan penumpang untuk penggunaan pribadi (Obat, Obat Bahan Alam, Kosmetik, Suplemen Kesehatan, dan Pangan Olahan) sesuai dengan regulasi Badan Pengawas Obat dan Makanan.
             </p>
             
             <!-- TAMPILAN BANNER MASKOT BEDELAU -->
@@ -246,6 +246,75 @@
                     </div>
                 </div>
             </div>
+
+            
+<!-- STATISTIK PENGECEKAN PER KATEGORI -->
+<div class="category-counter-section">
+
+    <div class="category-counter-title">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Statistik Pengecekan Barang</span>
+    </div>
+
+    <div class="category-counter-grid">
+
+        <!-- OBAT -->
+        <div class="category-stat-item">
+            <span class="category-stat-icon">💊</span>
+            <div class="category-stat-info">
+                <small>Obat</small>
+                <strong id="count-obat">0</strong>
+            </div>
+        </div>
+
+        <!-- OBAT TRADISIONAL -->
+        <div class="category-stat-item">
+            <span class="category-stat-icon">🌿</span>
+            <div class="category-stat-info">
+                <small>Obat Tradisional</small>
+                <strong id="count-obat_tradisional">0</strong>
+            </div>
+        </div>
+
+        <!-- KOSMETIK -->
+        <div class="category-stat-item">
+            <span class="category-stat-icon">💄</span>
+            <div class="category-stat-info">
+                <small>Kosmetika</small>
+                <strong id="count-kosmetik">0</strong>
+            </div>
+        </div>
+
+        <!-- SUPLEMEN -->
+        <div class="category-stat-item">
+            <span class="category-stat-icon">💪🏻</span>
+            <div class="category-stat-info">
+                <small>Suplemen Kesehatan</small>
+                <strong id="count-suplemen">0</strong>
+            </div>
+        </div>
+
+        <!-- PKMK -->
+        <div class="category-stat-item">
+            <span class="category-stat-icon">🏥</span>
+            <div class="category-stat-info">
+                <small>Pangan Olahan Medis Khusus (PKMK)</small>
+                <strong id="count-pkmk">0</strong>
+            </div>
+        </div>
+
+        <!-- PANGAN OLAHAN LAIN -->
+        <div class="category-stat-item">
+            <span class="category-stat-icon">🧃</span>
+            <div class="category-stat-info">
+                <small>Pangan Olahan Lain</small>
+                <strong id="count-makanan">0</strong>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
             <script>
                 (function() {
@@ -349,7 +418,7 @@
                 <div class="faq-item">
                     <h4 class="faq-question">Q: Apa itu aturan pembatasan barang bawaan BPOM?</h4>
                     <div class="faq-answer">
-                        Aturan ini mengatur jumlah maksimal komoditi obat, obat tradisional, suplemen, kosmetik, dan pangan olahan yang boleh dibawa oleh penumpang dari luar negeri ke Indonesia untuk penggunaan pribadi tanpa izin khusus.
+                        Aturan ini mengatur jumlah maksimal komoditi obat, obat tradisional, suplemen, kosmetik, dan pangan olahan yang boleh dibawa oleh penumpang dari luar negeri ke Indonesia untuk penggunaan pribadi sesuai dengan <strong>PERATURAN BADAN PENGAWAS OBAT DAN MAKANAN  NOMOR 28 TAHUN 2023 TENTANG PERUBAHAN ATAS PERATURAN BADAN PENGAWAS OBAT DAN MAKANAN NOMOR 27 TAHUN 2022 TENTANG PENGAWASAN PEMASUKAN OBAT DAN MAKANAN KE DALAM WILAYAH INDONESIA.</strong>
                     </div>
                 </div>
 
@@ -407,8 +476,11 @@
             </p>
 
             <!-- Opsi Pilihan Feedback -->
+<<<<<<< HEAD
             
             <!-- Opsi Pilihan Feedback -->
+=======
+>>>>>>> 07075d4 (revisi 1)
             <div id="feedbackOptions" class="feedback-options">
 
                 <button onclick="submitFeedback('useful')" class="feedback-btn-useful">
