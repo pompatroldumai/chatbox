@@ -422,6 +422,7 @@ function handleAfterAction(actionId, text) {
 // ==========================================
 // 5. MODALS & UTILITY FUNCTIONS
 // ==========================================
+
 function showModal(status, title, message, actions = null) {
     const modalIcon = document.getElementById('modalIcon');
     const modalBtn = document.getElementById('modalBtn');
@@ -442,8 +443,14 @@ function showModal(status, title, message, actions = null) {
         modalIcon.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`;
     }
 
+    // BARU: Simpan hasil pengecekan ke bubble chat
+    const resultMessage = `${title}\n\n${message}`;
+    appendBotMessage(resultMessage);
+
+    // Tetap pertahankan suara hasil
     playResultSound(status);
 
+    // Popup tetap muncul seperti sebelumnya
     document.getElementById('modalPopup').style.display = 'flex';
 }
 
