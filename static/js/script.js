@@ -377,12 +377,29 @@ function sendPkmkAnswer(hasPrescription) {
     });
 }
 
+
 function handleAfterAction(actionId, text) {
     appendUserMessage(text);
 
     if (actionId === 'check_another') {
+        // Bersihkan seluruh input dan riwayat pengecekan lama
+        chatBody.innerHTML = '';
+        currentActions = null;
+
+        // Tutup popup hasil sebelumnya
+        const modal = document.getElementById('modalPopup');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+
+        // Tampilkan menu kategori baru tanpa refresh
         fetch('/api/main_menu')
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Gagal memuat menu utama');
+                }
+                return res.json();
+            })
             .then(data => {
                 appendMainMenu(data.message, data.options);
             })
@@ -395,12 +412,12 @@ function handleAfterAction(actionId, text) {
             "Terima kasih telah menggunakan layanan pengecekan batasan barang bawaan. Semoga perjalanan Anda menyenangkan! 👋"
         );
 
-        // POPUP FEEDBACK MUNCUL SETELAH FINISH
         setTimeout(() => {
             openFeedbackModal();
         }, 800);
     }
 }
+
 
 // ==========================================
 // 5. MODALS & UTILITY FUNCTIONS
